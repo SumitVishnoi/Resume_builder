@@ -21,3 +21,7 @@ export interface GenerateProjectDescription {
     jobTitle: string,
     experience: string
 }
+
+export interface ImproveContentBody {
+    content: string;
+}
