@@ -1,113 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
-  --color-primary: #2563EB;
-  --color-primary-dark: #1E40AF;
-  --color-primary-light: #3B82F6;
-  --color-primary-50: #EFF6FF;
-  --color-primary-100: #DBEAFE;
-  --color-primary-200: #BFDBFE;
-  --color-surface: #FFFFFF;
-  --color-surface-alt: #F9FAFB;
-  --color-surface-hover: #F3F4F6;
-  --color-border: #E5E7EB;
-  --color-border-dark: #D1D5DB;
-  --color-text: #000000;
-  --color-text-secondary: #4B5563;
-  --color-text-muted: #9CA3AF;
-  --color-danger: #DC2626;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+body {
+  background-color: #F8FAFC;
+  color: #0F172A;
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Focus ring utility */
-.focus-ring {
-  @apply outline-none ring-2 ring-primary ring-offset-2;
-}
-
-/* Smooth transitions */
-.transition-base {
-  @apply transition-all duration-200 ease-in-out;
-}
-
-/* Print styles for PDF */
-@media print {
-  body {
-    background: white !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .no-print {
-    display: none !important;
-  }
-
-  .print-only {
-    display: block !important;
-  }
-}
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--color-surface-alt);
+  background: #F8FAFC;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-dark);
-  border-radius: 3px;
+  background: #E2E8F0;
+  border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
-}
-
-/* Animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.animate-slide-in {
-  animation: slideIn 0.3s ease-out forwards;
+  background: #64748B;
 }
