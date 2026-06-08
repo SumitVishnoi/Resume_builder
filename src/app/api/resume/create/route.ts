@@ -1,6 +1,6 @@
 import { connectDb } from "@/lib/db";
 import { getCurrentUser } from "@/lib/getCurrentUser";
-import resumeModel from "@/models/resume.model";
+import resumeModel from "@/models/Resume.model";
 import { ApiResponse } from "@/types/api.types";
 import { NextRequest, NextResponse } from "next/server";
 
