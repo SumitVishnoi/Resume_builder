@@ -79,29 +79,7 @@ export default function LoginPage() {
               download instantly and land your dream job.
             </p>
 
-            {/* Resume Mockup */}
-            <div className="mt-14 w-[450px] rounded-3xl bg-white p-6 shadow-2xl">
-              <div className="mb-5 flex items-center gap-4">
-                <div className="h-14 w-14 rounded-full bg-slate-300" />
-                <div>
-                  <div className="h-4 w-32 rounded bg-slate-800" />
-                  <div className="mt-2 h-3 w-24 rounded bg-slate-300" />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="h-3 rounded bg-slate-200" />
-                <div className="h-3 rounded bg-slate-200" />
-                <div className="h-3 w-3/4 rounded bg-slate-200" />
-              </div>
-
-              <div className="mt-6 h-20 rounded-xl bg-indigo-100" />
-
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                <div className="h-24 rounded-xl bg-slate-100" />
-                <div className="h-24 rounded-xl bg-slate-100" />
-              </div>
-            </div>
+            
           </div>
         </section>
 
@@ -209,9 +187,9 @@ export default function LoginPage() {
             </button>
 
             <p className="mt-8 text-center text-slate-600">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <a
-                href="/register"
+                href="/auth/register"
                 className="font-semibold text-indigo-600"
               >
                 Create Account
