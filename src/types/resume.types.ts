@@ -7,7 +7,7 @@ export interface IPersonalInfo {
     location: string;
     githubUrl: string;
     linkedIn: string;
-    portfolio: string
+    portfolio?: string
 }
 
 export interface IWorkExperience {
