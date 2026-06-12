@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Plus,
@@ -321,9 +321,9 @@ export default function DashboardPage() {
 
   // ── Fetch resumes ─────────────────────────────────────────────────────────
 
-  const fetchResumes = async () => {
+  const fetchResumes = useCallback (async () => {
     try {
-      const res = await fetch("/api/resume");
+      const res = await fetch("/api/resume", {method: "GET"});
       const data = await res.json();
       if (data.success) {
         setResumes(data.data.resumes ?? data.data.resume ?? []);
@@ -335,18 +335,18 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [])
 
   useEffect(() => {
-     fetchResumes();
-  }, [fetchResumes]);
+     fetchResumes()
+  }, [fetchResumes])
 
   // ── Create resume ─────────────────────────────────────────────────────────
 
   const handleCreate = async () => {
     setCreating(true);
     try {
-      const res = await fetch("/api/resume", { method: "POST" });
+      const res = await fetch("/api/resume/create", { method: "POST" });
       const data = await res.json();
       const newResume = data.data?.resume;
       if (newResume?._id) {

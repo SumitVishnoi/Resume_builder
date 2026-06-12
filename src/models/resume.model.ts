@@ -4,7 +4,8 @@ import mongoose from "mongoose"
 const resumeSchema = new mongoose.Schema<IResume> ({
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     },
     title: {
         type: String,

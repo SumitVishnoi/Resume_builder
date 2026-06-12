@@ -33,7 +33,7 @@ interface PersonalInfo {
 }
 
 interface Education {
-  _id?: string;
+  tempId?: string;
   institution?: string;
   degree?: string;
   field?: string;
@@ -43,7 +43,7 @@ interface Education {
 }
 
 interface WorkExperience {
-  _id?: string;
+  tempId?: string;
   company?: string;
   role?: string;
   startDate?: string;
@@ -53,7 +53,7 @@ interface WorkExperience {
 }
 
 interface Project {
-  _id?: string;
+  tempId?: string;
   name?: string;
   description?: string;
   techStack?: string;
@@ -61,7 +61,7 @@ interface Project {
 }
 
 interface Certification {
-  _id?: string;
+  tempId?: string;
   name?: string;
   issuer?: string;
   year?: string;
@@ -95,7 +95,7 @@ type SaveState = "idle" | "saving" | "saved" | "error";
 const uid = () => Math.random().toString(36).slice(2, 9);
 
 const emptyEducation = (): Education => ({
-  _id: uid(),
+  tempId: uid(),
   institution: "",
   degree: "",
   field: "",
@@ -105,7 +105,7 @@ const emptyEducation = (): Education => ({
 });
 
 const emptyExperience = (): WorkExperience => ({
-  _id: uid(),
+  tempId: uid(),
   company: "",
   role: "",
   startDate: "",
@@ -115,7 +115,7 @@ const emptyExperience = (): WorkExperience => ({
 });
 
 const emptyProject = (): Project => ({
-  _id: uid(),
+  tempId: uid(),
   name: "",
   description: "",
   techStack: "",
@@ -123,7 +123,7 @@ const emptyProject = (): Project => ({
 });
 
 const emptyCert = (): Certification => ({
-  _id: uid(),
+  tempId: uid(),
   name: "",
   issuer: "",
   year: "",
@@ -264,8 +264,8 @@ function ResumePreview({ resume }: { resume: Resume }) {
             Experience
           </h2>
           <div className="space-y-4">
-            {resume.workExperience.map((w) => (
-              <div key={w._id}>
+            {resume.workExperience.map((w, tempId) => (
+              <div key={w.tempId}>
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="font-bold text-[13px]">
@@ -299,7 +299,7 @@ function ResumePreview({ resume }: { resume: Resume }) {
           </h2>
           <div className="space-y-3">
             {resume.education.map((e) => (
-              <div key={e._id} className="flex items-start justify-between">
+              <div key={e.tempId} className="flex items-start justify-between">
                 <div>
                   <p className="font-bold text-[13px]">
                     {e.institution || (
@@ -330,7 +330,7 @@ function ResumePreview({ resume }: { resume: Resume }) {
           </h2>
           <div className="space-y-3">
             {resume.projects.map((proj) => (
-              <div key={proj._id}>
+              <div key={proj.tempId}>
                 <div className="flex items-center gap-2">
                   <p className="font-bold text-[13px]">
                     {proj.name || <em className="text-[#C4C4CC]">Project</em>}
@@ -385,7 +385,7 @@ function ResumePreview({ resume }: { resume: Resume }) {
           </h2>
           <div className="space-y-1.5">
             {resume.certification.map((c) => (
-              <div key={c._id} className="flex items-center justify-between">
+              <div key={c.tempId} className="flex items-center justify-between">
                 <p className="text-[13px] font-semibold">{c.name}</p>
                 <p className="text-[11px] text-[#9CA3AF]">
                   {c.issuer} {c.year && `· ${c.year}`}
@@ -638,7 +638,7 @@ export default function ResumeEditorPage() {
               rows={7}
             />
             <p className="mt-2 text-[11px] text-[#9CA3AF]">
-              Keep it to 2–4 sentences. Write in first person without "I".
+              Keep it to 2–4 sentences. Write in first person without `I`.
             </p>
           </div>
         );
@@ -647,12 +647,12 @@ export default function ResumeEditorPage() {
         return (
           <div className="space-y-3">
             {resume.workExperience?.map((w, i) => {
-              const open = expandedCards[w._id!] !== false;
+              const open = expandedCards[w.tempId!] !== false;
               return (
-                <Card key={w._id} onRemove={() => update({ workExperience: resume.workExperience.filter((_, j) => j !== i) })}>
+                <Card key={w.tempId} onRemove={() => update({ workExperience: resume.workExperience.filter((_, j) => j !== i) })}>
                   <div
                     className="flex items-center justify-between cursor-pointer pr-6"
-                    onClick={() => setExpandedCards((p) => ({ ...p, [w._id!]: !open }))}
+                    onClick={() => setExpandedCards((p) => ({ ...p, [w.tempId!]: !open }))}
                   >
                     <p className="text-sm font-semibold text-[#111318]">
                       {w.role || w.company || <span className="text-[#C4C4CC] font-normal italic">New experience</span>}
@@ -696,10 +696,10 @@ export default function ResumeEditorPage() {
         return (
           <div className="space-y-3">
             {resume.education?.map((e, i) => {
-              const open = expandedCards[e._id!] !== false;
+              const open = expandedCards[e.tempId!] !== false;
               return (
-                <Card key={e._id} onRemove={() => update({ education: resume.education.filter((_, j) => j !== i) })}>
-                  <div className="flex items-center justify-between cursor-pointer pr-6" onClick={() => setExpandedCards((p) => ({ ...p, [e._id!]: !open }))}>
+                <Card key={e.tempId} onRemove={() => update({ education: resume.education.filter((_, j) => j !== i) })}>
+                  <div className="flex items-center justify-between cursor-pointer pr-6" onClick={() => setExpandedCards((p) => ({ ...p, [e.tempId!]: !open }))}>
                     <p className="text-sm font-semibold text-[#111318]">
                       {e.institution || <span className="text-[#C4C4CC] font-normal italic">New education</span>}
                     </p>
@@ -744,10 +744,10 @@ export default function ResumeEditorPage() {
         return (
           <div className="space-y-3">
             {resume.projects?.map((proj, i) => {
-              const open = expandedCards[proj._id!] !== false;
+              const open = expandedCards[proj.tempId!] !== false;
               return (
-                <Card key={proj._id} onRemove={() => update({ projects: resume.projects.filter((_, j) => j !== i) })}>
-                  <div className="flex items-center justify-between cursor-pointer pr-6" onClick={() => setExpandedCards((p) => ({ ...p, [proj._id!]: !open }))}>
+                <Card key={proj.tempId} onRemove={() => update({ projects: resume.projects.filter((_, j) => j !== i) })}>
+                  <div className="flex items-center justify-between cursor-pointer pr-6" onClick={() => setExpandedCards((p) => ({ ...p, [proj.tempId!]: !open }))}>
                     <p className="text-sm font-semibold text-[#111318]">
                       {proj.name || <span className="text-[#C4C4CC] font-normal italic">New project</span>}
                     </p>
@@ -836,7 +836,7 @@ export default function ResumeEditorPage() {
         return (
           <div className="space-y-3">
             {resume.certification?.map((c, i) => (
-              <Card key={c._id} onRemove={() => update({ certification: resume.certification.filter((_, j) => j !== i) })}>
+              <Card key={c.tempId} onRemove={() => update({ certification: resume.certification.filter((_, j) => j !== i) })}>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">
                     <Label>Certification Name</Label>
@@ -948,7 +948,7 @@ export default function ResumeEditorPage() {
             </div>
             <h3 className="text-base font-semibold text-[#111318] mb-1">Delete this resume?</h3>
             <p className="text-sm text-[#6B7280] mb-6">
-              "{resume.title || "Untitled Resume"}" will be permanently removed. This action cannot be undone.
+              `{resume.title || "Untitled Resume"}` will be permanently removed. This action cannot be undone.
             </p>
             <div className="flex gap-3">
               <button
