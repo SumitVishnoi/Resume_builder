@@ -24,28 +24,28 @@ import {
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface PersonalInfo {
-  fullName?: string;
+  fullname?: string;
   email?: string;
-  phone?: string;
+  mobile?: string;
   location?: string;
-  linkedin?: string;
-  website?: string;
+  linkedIn?: string;
+  githubUrl?: string;
 }
 
 interface Education {
   tempId?: string;
-  institution?: string;
+  institute?: string;
   degree?: string;
-  field?: string;
-  startYear?: string;
-  endYear?: string;
+  // field?: string;
+  startDate?: string;
+  endDate?: string;
   gpa?: string;
 }
 
 interface WorkExperience {
   tempId?: string;
   company?: string;
-  role?: string;
+  position?: string;
   startDate?: string;
   endDate?: string;
   current?: boolean;
@@ -54,10 +54,10 @@ interface WorkExperience {
 
 interface Project {
   tempId?: string;
-  name?: string;
+  title?: string;
   description?: string;
   techStack?: string;
-  link?: string;
+  liveUrl?: string;
 }
 
 interface Certification {
@@ -96,18 +96,18 @@ const uid = () => Math.random().toString(36).slice(2, 9);
 
 const emptyEducation = (): Education => ({
   tempId: uid(),
-  institution: "",
+  institute: "",
   degree: "",
   field: "",
-  startYear: "",
-  endYear: "",
+  startDate: "",
+  endDate: "",
   gpa: "",
 });
 
 const emptyExperience = (): WorkExperience => ({
   tempId: uid(),
   company: "",
-  role: "",
+  position: "",
   startDate: "",
   endDate: "",
   current: false,
@@ -116,10 +116,10 @@ const emptyExperience = (): WorkExperience => ({
 
 const emptyProject = (): Project => ({
   tempId: uid(),
-  name: "",
+  title: "",
   description: "",
   techStack: "",
-  link: "",
+  liveUrl: "",
 });
 
 const emptyCert = (): Certification => ({
@@ -232,16 +232,16 @@ function ResumePreview({ resume }: { resume: Resume }) {
       {/* Header */}
       <div className="mb-6 pb-5 border-b-2 border-[#111318]">
         <h1 className="text-3xl font-bold tracking-tight mb-1">
-          {p.fullName || (
-            <span className="text-[#C4C4CC] italic font-normal">Your Name</span>
+          {p.fullname || (
+            <span className="text-[#C4C4CC] italic font-normal">{p.fullname}</span>
           )}
         </h1>
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6B7280] mt-2">
           {p.email && <span>{p.email}</span>}
-          {p.phone && <span>{p.phone}</span>}
+          {p.mobile && <span>{p.mobile}</span>}
           {p.location && <span>{p.location}</span>}
-          {p.linkedin && <span className="text-[#7C3AED]">{p.linkedin}</span>}
-          {p.website && <span className="text-[#7C3AED]">{p.website}</span>}
+          {p.linkedIn && <span className="text-[#7C3AED]">{p.linkedIn}</span>}
+          {p.githubUrl && <span className="text-[#7C3AED]">{p.githubUrl}</span>}
         </div>
       </div>
 
@@ -269,10 +269,10 @@ function ResumePreview({ resume }: { resume: Resume }) {
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="font-bold text-[13px]">
-                      {w.role || <em className="text-[#C4C4CC]">Role</em>}
+                      {w.position && <em className="text-[#C4C4CC]">{w.position}</em>}
                     </p>
                     <p className="text-[12px] text-[#6B7280]">
-                      {w.company || <em className="text-[#C4C4CC]">Company</em>}
+                      {w.company && <em className="text-[#C4C4CC]">{w.company}</em>}
                     </p>
                   </div>
                   <p className="text-[11px] text-[#9CA3AF] whitespace-nowrap">
@@ -302,19 +302,19 @@ function ResumePreview({ resume }: { resume: Resume }) {
               <div key={e.tempId} className="flex items-start justify-between">
                 <div>
                   <p className="font-bold text-[13px]">
-                    {e.institution || (
-                      <em className="text-[#C4C4CC]">Institution</em>
+                    {e.institute || (
+                      <em className="text-[#C4C4CC]">institute</em>
                     )}
                   </p>
-                  <p className="text-[12px] text-[#6B7280]">
+                  {/* <p className="text-[12px] text-[#6B7280]">
                     {[e.degree, e.field].filter(Boolean).join(", ")}
-                  </p>
+                  </p> */}
                   {e.gpa && (
                     <p className="text-[11px] text-[#9CA3AF]">GPA: {e.gpa}</p>
                   )}
                 </div>
                 <p className="text-[11px] text-[#9CA3AF] whitespace-nowrap">
-                  {e.startYear} {e.startYear && "–"} {e.endYear}
+                  {e.startDate} {e.startDate && "–"} {e.endDate}
                 </p>
               </div>
             ))}
@@ -333,11 +333,11 @@ function ResumePreview({ resume }: { resume: Resume }) {
               <div key={proj.tempId}>
                 <div className="flex items-center gap-2">
                   <p className="font-bold text-[13px]">
-                    {proj.name || <em className="text-[#C4C4CC]">Project</em>}
+                    {proj.title || <em className="text-[#C4C4CC]">Project</em>}
                   </p>
-                  {proj.link && (
+                  {proj.liveUrl && (
                     <span className="text-[11px] text-[#7C3AED]">
-                      {proj.link}
+                      {proj.liveUrl}
                     </span>
                   )}
                 </div>
@@ -557,9 +557,10 @@ export default function ResumeEditorPage() {
               <div>
                 <Label>Full Name</Label>
                 <Input
-                  value={resume.personalInfo?.fullName || ""}
+                type="text"
+                  value={resume.personalInfo?.fullname || ""}
                   onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, fullName: v } })
+                    update({ personalInfo: { ...resume.personalInfo, fullname: v } })
                   }
                   placeholder="Jane Smith"
                 />
@@ -578,9 +579,9 @@ export default function ResumeEditorPage() {
               <div>
                 <Label>Phone</Label>
                 <Input
-                  value={resume.personalInfo?.phone || ""}
+                  value={resume.personalInfo?.mobile || ""}
                   onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, phone: v } })
+                    update({ personalInfo: { ...resume.personalInfo, mobile: v } })
                   }
                   placeholder="+1 (555) 000-0000"
                 />
@@ -596,21 +597,21 @@ export default function ResumeEditorPage() {
                 />
               </div>
               <div>
-                <Label>LinkedIn</Label>
+                <Label>linkedIn</Label>
                 <Input
-                  value={resume.personalInfo?.linkedin || ""}
+                  value={resume.personalInfo?.linkedIn || ""}
                   onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, linkedin: v } })
+                    update({ personalInfo: { ...resume.personalInfo, linkedIn: v } })
                   }
-                  placeholder="linkedin.com/in/jane"
+                  placeholder="linkedIn.com/in/jane"
                 />
               </div>
               <div>
-                <Label>Website</Label>
+                <Label>website</Label>
                 <Input
-                  value={resume.personalInfo?.website || ""}
+                  value={resume.personalInfo?.githubUrl || ""}
                   onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, website: v } })
+                    update({ personalInfo: { ...resume.personalInfo, githubUrl: v } })
                   }
                   placeholder="janesmith.dev"
                 />
@@ -655,7 +656,7 @@ export default function ResumeEditorPage() {
                     onClick={() => setExpandedCards((p) => ({ ...p, [w.tempId!]: !open }))}
                   >
                     <p className="text-sm font-semibold text-[#111318]">
-                      {w.role || w.company || <span className="text-[#C4C4CC] font-normal italic">New experience</span>}
+                      {w.position || w.company || <span className="text-[#C4C4CC] font-normal italic">New experience</span>}
                     </p>
                     {open ? <ChevronUp size={14} className="text-[#9CA3AF]" /> : <ChevronDown size={14} className="text-[#9CA3AF]" />}
                   </div>
@@ -664,7 +665,7 @@ export default function ResumeEditorPage() {
                       <div className="grid grid-cols-2 gap-3">
                         <div>
                           <Label>Role</Label>
-                          <Input value={w.role || ""} onChange={(v) => { const arr = [...resume.workExperience]; arr[i] = { ...arr[i], role: v }; update({ workExperience: arr }); }} placeholder="Senior Engineer" />
+                          <Input value={w.position || ""} onChange={(v) => { const arr = [...resume.workExperience]; arr[i] = { ...arr[i], position: v }; update({ workExperience: arr }); }} placeholder="Senior Engineer" />
                         </div>
                         <div>
                           <Label>Company</Label>
@@ -701,31 +702,31 @@ export default function ResumeEditorPage() {
                 <Card key={e.tempId} onRemove={() => update({ education: resume.education.filter((_, j) => j !== i) })}>
                   <div className="flex items-center justify-between cursor-pointer pr-6" onClick={() => setExpandedCards((p) => ({ ...p, [e.tempId!]: !open }))}>
                     <p className="text-sm font-semibold text-[#111318]">
-                      {e.institution || <span className="text-[#C4C4CC] font-normal italic">New education</span>}
+                      {e.institute || <span className="text-[#C4C4CC] font-normal italic">New education</span>}
                     </p>
                     {open ? <ChevronUp size={14} className="text-[#9CA3AF]" /> : <ChevronDown size={14} className="text-[#9CA3AF]" />}
                   </div>
                   {open && (
                     <div className="grid grid-cols-2 gap-3 pt-1">
                       <div className="col-span-2">
-                        <Label>Institution</Label>
-                        <Input value={e.institution || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], institution: v }; update({ education: arr }); }} placeholder="MIT" />
+                        <Label>institution</Label>
+                        <Input value={e.institute || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], institute: v }; update({ education: arr }); }} placeholder="MIT" />
                       </div>
                       <div>
                         <Label>Degree</Label>
                         <Input value={e.degree || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], degree: v }; update({ education: arr }); }} placeholder="B.Sc." />
                       </div>
-                      <div>
+                      {/* <div>
                         <Label>Field</Label>
                         <Input value={e.field || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], field: v }; update({ education: arr }); }} placeholder="Computer Science" />
-                      </div>
+                      </div> */}
                       <div>
                         <Label>Start Year</Label>
-                        <Input value={e.startYear || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], startYear: v }; update({ education: arr }); }} placeholder="2018" />
+                        <Input value={e.startDate || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], startDate: v }; update({ education: arr }); }} placeholder="2018" />
                       </div>
                       <div>
                         <Label>End Year</Label>
-                        <Input value={e.endYear || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], endYear: v }; update({ education: arr }); }} placeholder="2022" />
+                        <Input value={e.endDate || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], endDate: v }; update({ education: arr }); }} placeholder="2022" />
                       </div>
                       <div>
                         <Label>GPA</Label>
@@ -749,7 +750,7 @@ export default function ResumeEditorPage() {
                 <Card key={proj.tempId} onRemove={() => update({ projects: resume.projects.filter((_, j) => j !== i) })}>
                   <div className="flex items-center justify-between cursor-pointer pr-6" onClick={() => setExpandedCards((p) => ({ ...p, [proj.tempId!]: !open }))}>
                     <p className="text-sm font-semibold text-[#111318]">
-                      {proj.name || <span className="text-[#C4C4CC] font-normal italic">New project</span>}
+                      {proj.title || <span className="text-[#C4C4CC] font-normal italic">New project</span>}
                     </p>
                     {open ? <ChevronUp size={14} className="text-[#9CA3AF]" /> : <ChevronDown size={14} className="text-[#9CA3AF]" />}
                   </div>
@@ -758,11 +759,11 @@ export default function ResumeEditorPage() {
                       <div className="grid grid-cols-2 gap-3">
                         <div>
                           <Label>Project Name</Label>
-                          <Input value={proj.name || ""} onChange={(v) => { const arr = [...resume.projects]; arr[i] = { ...arr[i], name: v }; update({ projects: arr }); }} placeholder="My App" />
+                          <Input value={proj.title || ""} onChange={(v) => { const arr = [...resume.projects]; arr[i] = { ...arr[i], title: v }; update({ projects: arr }); }} placeholder="My App" />
                         </div>
                         <div>
-                          <Label>Link</Label>
-                          <Input value={proj.link || ""} onChange={(v) => { const arr = [...resume.projects]; arr[i] = { ...arr[i], link: v }; update({ projects: arr }); }} placeholder="github.com/…" />
+                          <Label>live Url</Label>
+                          <Input value={proj.liveUrl || ""} onChange={(v) => { const arr = [...resume.projects]; arr[i] = { ...arr[i], liveUrl: v }; update({ projects: arr }); }} placeholder="github.com/…" />
                         </div>
                         <div className="col-span-2">
                           <Label>Tech Stack</Label>
@@ -771,7 +772,7 @@ export default function ResumeEditorPage() {
                       </div>
                       <div>
                         <Label>Description</Label>
-                        <Textarea value={proj.description || ""} onChange={(v) => { const arr = [...resume.projects]; arr[i] = { ...arr[i], description: v }; update({ projects: arr }); }} placeholder="What it does, your role, impact…" />
+                        <Textarea value={proj.description || ""} onChange={(v) => { const arr = [...resume.projects]; arr[i] = { ...arr[i], description: v }; update({ projects: arr }); }} placeholder="What it does, your position, impact…" />
                       </div>
                     </div>
                   )}
