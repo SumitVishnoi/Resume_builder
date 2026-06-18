@@ -29,6 +29,8 @@ export interface IProjects {
 export interface IEducation {
     institute: string;
     degree: string;
+    field: string;
+    gpa: number;
     startDate: string;
     endDate: string;
 }

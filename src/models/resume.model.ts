@@ -60,6 +60,8 @@ const resumeSchema = new mongoose.Schema<IResume> ({
              {
                 institute: String,
                 degree: String,
+                field: String,
+                gpa: Number,
                 startDate: String,
                 endDate: String
              }

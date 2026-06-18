@@ -20,75 +20,19 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
+import { Certification, Education, Project, Resume, SaveState, Section, WorkExperience } from "@/frontend/types/resume";
+import Label from "@/components/resume-editor/ui/Label";
+import Input from "@/components/resume-editor/ui/Input";
+import Textarea from "@/components/resume-editor/ui/Textarea";
+import Card from "@/components/resume-editor/ui/Card";
+import AddButton from "@/components/resume-editor/ui/AddButton";
+import { ResumePreview } from "@/components/resume-editor/ResumePreview";
+import PersonalSection from "@/components/resume-editor/sections/PersonalSection";
+import SummarySection from "@/components/resume-editor/sections/SummarySection";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-interface PersonalInfo {
-  fullname?: string;
-  email?: string;
-  mobile?: string;
-  location?: string;
-  linkedIn?: string;
-  githubUrl?: string;
-}
 
-interface Education {
-  tempId?: string;
-  institute?: string;
-  degree?: string;
-  // field?: string;
-  startDate?: string;
-  endDate?: string;
-  gpa?: string;
-}
-
-interface WorkExperience {
-  tempId?: string;
-  company?: string;
-  position?: string;
-  startDate?: string;
-  endDate?: string;
-  current?: boolean;
-  description?: string;
-}
-
-interface Project {
-  tempId?: string;
-  title?: string;
-  description?: string;
-  techStack?: string;
-  liveUrl?: string;
-}
-
-interface Certification {
-  tempId?: string;
-  name?: string;
-  issuer?: string;
-  year?: string;
-}
-
-interface Resume {
-  _id: string;
-  title: string;
-  summary: string;
-  personalInfo: PersonalInfo;
-  education: Education[];
-  workExperience: WorkExperience[];
-  projects: Project[];
-  skills: string[];
-  certification: Certification[];
-}
-
-type Section =
-  | "personal"
-  | "summary"
-  | "education"
-  | "experience"
-  | "projects"
-  | "skills"
-  | "certifications";
-
-type SaveState = "idle" | "saving" | "saved" | "error";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -131,273 +75,11 @@ const emptyCert = (): Certification => ({
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <label className="block text-[11px] font-semibold text-[#6B7280] uppercase tracking-widest mb-1.5">
-      {children}
-    </label>
-  );
-}
 
-function Input({
-  value,
-  onChange,
-  placeholder,
-  type = "text",
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  type?: string;
-}) {
-  return (
-    <input
-      type={type}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      className="w-full px-3.5 py-2.5 text-sm bg-white border border-[#E4E4E7] rounded-xl text-[#111318] placeholder:text-[#C4C4CC] focus:outline-none focus:border-[#7C3AED] focus:ring-2 focus:ring-[#7C3AED]/10 transition-all"
-    />
-  );
-}
-
-function Textarea({
-  value,
-  onChange,
-  placeholder,
-  rows = 3,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  rows?: number;
-}) {
-  return (
-    <textarea
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      rows={rows}
-      className="w-full px-3.5 py-2.5 text-sm bg-white border border-[#E4E4E7] rounded-xl text-[#111318] placeholder:text-[#C4C4CC] focus:outline-none focus:border-[#7C3AED] focus:ring-2 focus:ring-[#7C3AED]/10 transition-all resize-none"
-    />
-  );
-}
-
-function Card({
-  children,
-  onRemove,
-}: {
-  children: React.ReactNode;
-  onRemove: () => void;
-}) {
-  return (
-    <div className="relative bg-[#FAFAFA] border border-[#E4E4E7] rounded-2xl p-4 space-y-3">
-      <button
-        onClick={onRemove}
-        className="absolute top-3.5 right-3.5 p-1 rounded-lg text-[#C4C4CC] hover:text-red-400 hover:bg-red-50 transition-colors"
-      >
-        <X size={14} />
-      </button>
-      {children}
-    </div>
-  );
-}
-
-function AddButton({
-  onClick,
-  label,
-}: {
-  onClick: () => void;
-  label: string;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className="w-full flex items-center justify-center gap-2 py-2.5 border-2 border-dashed border-[#E4E4E7] rounded-xl text-sm text-[#9CA3AF] hover:border-[#7C3AED] hover:text-[#7C3AED] hover:bg-[#F4F3FF] transition-all"
-    >
-      <Plus size={14} /> {label}
-    </button>
-  );
-}
 
 // ─── Resume Preview ───────────────────────────────────────────────────────────
 
-function ResumePreview({ resume }: { resume: Resume }) {
-  const p = resume.personalInfo || {};
-  return (
-    <div
-      className="bg-white rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.10)] p-10 font-serif text-[#111318] text-sm leading-relaxed max-w-[680px] mx-auto"
-      style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
-    >
-      {/* Header */}
-      <div className="mb-6 pb-5 border-b-2 border-[#111318]">
-        <h1 className="text-3xl font-bold tracking-tight mb-1">
-          {p.fullname || (
-            <span className="text-[#C4C4CC] italic font-normal">{p.fullname}</span>
-          )}
-        </h1>
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6B7280] mt-2">
-          {p.email && <span>{p.email}</span>}
-          {p.mobile && <span>{p.mobile}</span>}
-          {p.location && <span>{p.location}</span>}
-          {p.linkedIn && <span className="text-[#7C3AED]">{p.linkedIn}</span>}
-          {p.githubUrl && <span className="text-[#7C3AED]">{p.githubUrl}</span>}
-        </div>
-      </div>
 
-      {/* Summary */}
-      {resume.summary && (
-        <div className="mb-5">
-          <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#7C3AED] mb-2">
-            Profile
-          </h2>
-          <p className="text-[13px] text-[#374151] leading-relaxed">
-            {resume.summary}
-          </p>
-        </div>
-      )}
-
-      {/* Experience */}
-      {resume.workExperience?.length > 0 && (
-        <div className="mb-5">
-          <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#7C3AED] mb-3">
-            Experience
-          </h2>
-          <div className="space-y-4">
-            {resume.workExperience.map((w, tempId) => (
-              <div key={w.tempId}>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="font-bold text-[13px]">
-                      {w.position && <em className="text-[#C4C4CC]">{w.position}</em>}
-                    </p>
-                    <p className="text-[12px] text-[#6B7280]">
-                      {w.company && <em className="text-[#C4C4CC]">{w.company}</em>}
-                    </p>
-                  </div>
-                  <p className="text-[11px] text-[#9CA3AF] whitespace-nowrap">
-                    {w.startDate} {w.startDate && "–"}{" "}
-                    {w.current ? "Present" : w.endDate}
-                  </p>
-                </div>
-                {w.description && (
-                  <p className="mt-1.5 text-[12px] text-[#374151]">
-                    {w.description}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Education */}
-      {resume.education?.length > 0 && (
-        <div className="mb-5">
-          <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#7C3AED] mb-3">
-            Education
-          </h2>
-          <div className="space-y-3">
-            {resume.education.map((e) => (
-              <div key={e.tempId} className="flex items-start justify-between">
-                <div>
-                  <p className="font-bold text-[13px]">
-                    {e.institute || (
-                      <em className="text-[#C4C4CC]">institute</em>
-                    )}
-                  </p>
-                  {/* <p className="text-[12px] text-[#6B7280]">
-                    {[e.degree, e.field].filter(Boolean).join(", ")}
-                  </p> */}
-                  {e.gpa && (
-                    <p className="text-[11px] text-[#9CA3AF]">GPA: {e.gpa}</p>
-                  )}
-                </div>
-                <p className="text-[11px] text-[#9CA3AF] whitespace-nowrap">
-                  {e.startDate} {e.startDate && "–"} {e.endDate}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Projects */}
-      {resume.projects?.length > 0 && (
-        <div className="mb-5">
-          <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#7C3AED] mb-3">
-            Projects
-          </h2>
-          <div className="space-y-3">
-            {resume.projects.map((proj) => (
-              <div key={proj.tempId}>
-                <div className="flex items-center gap-2">
-                  <p className="font-bold text-[13px]">
-                    {proj.title || <em className="text-[#C4C4CC]">Project</em>}
-                  </p>
-                  {proj.liveUrl && (
-                    <span className="text-[11px] text-[#7C3AED]">
-                      {proj.liveUrl}
-                    </span>
-                  )}
-                </div>
-                {proj.techStack && (
-                  <p className="text-[11px] text-[#9CA3AF] mt-0.5">
-                    {proj.techStack}
-                  </p>
-                )}
-                {proj.description && (
-                  <p className="text-[12px] text-[#374151] mt-1">
-                    {proj.description}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Skills */}
-      {resume.skills?.filter(Boolean).length > 0 && (
-        <div className="mb-5">
-          <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#7C3AED] mb-2">
-            Skills
-          </h2>
-          <div className="flex flex-wrap gap-1.5">
-            {resume.skills.filter(Boolean).map((skill, i) => (
-              <span
-                key={i}
-                className="px-2.5 py-0.5 bg-[#F4F3FF] text-[#7C3AED] text-[11px] rounded-full border border-[#DDD6FE]"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Certifications */}
-      {resume.certification?.length > 0 && (
-        <div>
-          <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#7C3AED] mb-2">
-            Certifications
-          </h2>
-          <div className="space-y-1.5">
-            {resume.certification.map((c) => (
-              <div key={c.tempId} className="flex items-center justify-between">
-                <p className="text-[13px] font-semibold">{c.name}</p>
-                <p className="text-[11px] text-[#9CA3AF]">
-                  {c.issuer} {c.year && `· ${c.year}`}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
@@ -552,96 +234,12 @@ export default function ResumeEditorPage() {
     switch (activeSection) {
       case "personal":
         return (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <Label>Full Name</Label>
-                <Input
-                type="text"
-                  value={resume.personalInfo?.fullname || ""}
-                  onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, fullname: v } })
-                  }
-                  placeholder="Jane Smith"
-                />
-              </div>
-              <div>
-                <Label>Email</Label>
-                <Input
-                  type="email"
-                  value={resume.personalInfo?.email || ""}
-                  onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, email: v } })
-                  }
-                  placeholder="jane@example.com"
-                />
-              </div>
-              <div>
-                <Label>Phone</Label>
-                <Input
-                  value={resume.personalInfo?.mobile || ""}
-                  onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, mobile: v } })
-                  }
-                  placeholder="+1 (555) 000-0000"
-                />
-              </div>
-              <div>
-                <Label>Location</Label>
-                <Input
-                  value={resume.personalInfo?.location || ""}
-                  onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, location: v } })
-                  }
-                  placeholder="San Francisco, CA"
-                />
-              </div>
-              <div>
-                <Label>linkedIn</Label>
-                <Input
-                  value={resume.personalInfo?.linkedIn || ""}
-                  onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, linkedIn: v } })
-                  }
-                  placeholder="linkedIn.com/in/jane"
-                />
-              </div>
-              <div>
-                <Label>website</Label>
-                <Input
-                  value={resume.personalInfo?.githubUrl || ""}
-                  onChange={(v) =>
-                    update({ personalInfo: { ...resume.personalInfo, githubUrl: v } })
-                  }
-                  placeholder="janesmith.dev"
-                />
-              </div>
-            </div>
-            <div>
-              <Label>Resume Title</Label>
-              <Input
-                value={resume.title || ""}
-                onChange={(v) => update({ title: v })}
-                placeholder="e.g. Software Engineer — Google"
-              />
-            </div>
-          </div>
+          <PersonalSection update={update} resume={resume}/>
         );
 
       case "summary":
         return (
-          <div>
-            <Label>Professional Summary</Label>
-            <Textarea
-              value={resume.summary || ""}
-              onChange={(v) => update({ summary: v })}
-              placeholder="A concise statement about your professional background, key skills, and career goals…"
-              rows={7}
-            />
-            <p className="mt-2 text-[11px] text-[#9CA3AF]">
-              Keep it to 2–4 sentences. Write in first person without `I`.
-            </p>
-          </div>
+          <SummarySection update={update} resume={resume} />
         );
 
       case "experience":
@@ -650,7 +248,7 @@ export default function ResumeEditorPage() {
             {resume.workExperience?.map((w, i) => {
               const open = expandedCards[w.tempId!] !== false;
               return (
-                <Card key={w.tempId} onRemove={() => update({ workExperience: resume.workExperience.filter((_, j) => j !== i) })}>
+                <Card key={i} onRemove={() => update({ workExperience: resume.workExperience.filter((_, j) => j !== i) })}>
                   <div
                     className="flex items-center justify-between cursor-pointer pr-6"
                     onClick={() => setExpandedCards((p) => ({ ...p, [w.tempId!]: !open }))}
@@ -699,7 +297,7 @@ export default function ResumeEditorPage() {
             {resume.education?.map((e, i) => {
               const open = expandedCards[e.tempId!] !== false;
               return (
-                <Card key={e.tempId} onRemove={() => update({ education: resume.education.filter((_, j) => j !== i) })}>
+                <Card key={i} onRemove={() => update({ education: resume.education.filter((_, j) => j !== i) })}>
                   <div className="flex items-center justify-between cursor-pointer pr-6" onClick={() => setExpandedCards((p) => ({ ...p, [e.tempId!]: !open }))}>
                     <p className="text-sm font-semibold text-[#111318]">
                       {e.institute || <span className="text-[#C4C4CC] font-normal italic">New education</span>}
@@ -716,10 +314,10 @@ export default function ResumeEditorPage() {
                         <Label>Degree</Label>
                         <Input value={e.degree || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], degree: v }; update({ education: arr }); }} placeholder="B.Sc." />
                       </div>
-                      {/* <div>
+                      <div>
                         <Label>Field</Label>
                         <Input value={e.field || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], field: v }; update({ education: arr }); }} placeholder="Computer Science" />
-                      </div> */}
+                      </div>
                       <div>
                         <Label>Start Year</Label>
                         <Input value={e.startDate || ""} onChange={(v) => { const arr = [...resume.education]; arr[i] = { ...arr[i], startDate: v }; update({ education: arr }); }} placeholder="2018" />

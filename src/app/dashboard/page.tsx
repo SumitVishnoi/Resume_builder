@@ -11,8 +11,6 @@ import {
   Trash2,
   Edit3,
   Clock,
-  LogOut,
-  Settings,
   ChevronRight,
   X,
   Download,
@@ -21,6 +19,8 @@ import {
   CheckCircle2,
   Circle,
 } from "lucide-react";
+import Navbar from "@/components/Navbar";
+
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -847,27 +847,7 @@ export default function DashboardPage() {
       )}
 
       {/* ── Navbar ── */}
-      <header className="bg-white border-b border-[#E4E4E7] sticky top-0 z-30">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-[#7C3AED] rounded-lg flex items-center justify-center">
-              <FileText size={14} className="text-white" />
-            </div>
-            <span className="font-semibold text-[#111318] text-sm tracking-tight">
-              ResumeKit
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <button className="p-2 rounded-lg text-[#9CA3AF] hover:text-[#6B7280] hover:bg-[#F4F4F5] transition-colors">
-              <Settings size={16} />
-            </button>
-            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[#9CA3AF] hover:text-[#6B7280] hover:bg-[#F4F4F5] transition-colors">
-              <LogOut size={15} />
-              <span className="hidden sm:inline">Sign out</span>
-            </button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="max-w-6xl mx-auto px-6 py-10 space-y-8">
         {/* ── Hero ── */}
@@ -903,6 +883,8 @@ export default function DashboardPage() {
             {creating ? "Creating…" : "New resume"}
           </button>
         </div>
+
+        
 
         {/* ── Stats strip ── */}
         {!loading && resumes.length > 0 && (
@@ -1006,7 +988,7 @@ export default function DashboardPage() {
                 No resumes yet
               </p>
               <p className="text-sm text-[#9CA3AF] mt-1 max-w-xs">
-                Create your first resume. We'll score it for ATS compatibility
+                Create your first resume. We&apos;ll score it for ATS compatibility
                 as you build it.
               </p>
             </div>
