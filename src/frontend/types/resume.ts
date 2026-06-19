@@ -52,6 +52,9 @@ export interface Resume {
   projects: Project[];
   skills: string[];
   certification: Certification[];
+
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type Section =
