@@ -46,6 +46,8 @@ interface Resume {
   updatedAt: string;
 }
 
+
+
 // ─── ATS Score Engine ────────────────────────────────────────────────────────
 
 interface ATSBreakdown {
@@ -678,6 +680,27 @@ export default function DashboardPage() {
     setTimeout(() => setToast(null), 3200);
   };
 
+  // ─── logout user ────────────────────────────────────────────────────────
+
+const handleLogout = async () => {
+  try {
+    const res = await fetch("/api/auth/logout", {
+      method: "POST",
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      showToast(data.message, "ok");
+      router.push("/auth/login");
+    } else {
+      showToast(data.message, "err");
+    }
+  } catch {
+    showToast("Could not reach the server", "err");
+  }
+};
+
   // ── Fetch ─────────────────────────────────────────────────────────────────
 
   const fetchResumes = useCallback(async () => {
@@ -847,7 +870,7 @@ export default function DashboardPage() {
       )}
 
       {/* ── Navbar ── */}
-      <Navbar />
+      <Navbar signOut={handleLogout}/>
 
       <main className="max-w-6xl mx-auto px-6 py-10 space-y-8">
         {/* ── Hero ── */}

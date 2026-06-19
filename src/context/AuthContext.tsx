@@ -1,98 +1,75 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 
-interface AuthUser {
+interface User {
   _id: string;
   name: string;
   email: string;
 }
 
 interface AuthContextType {
-  user: AuthUser | null;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   loading: boolean;
-  error: string | null;
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (name: string, email: string, password: string, mobile: string) => Promise<boolean>;
-  logout: () => Promise<void>;
-  clearError: () => void;
+  hydrateUser: () => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const Auth = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export const AuthProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const clearError = useCallback(() => setError(null), []);
-
-  const login = useCallback(async (email: string, password: string): Promise<boolean> => {
-    setLoading(true);
-    setError(null);
+  const hydrateUser = async () => {
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch("/api/auth/me");
       const data = await res.json();
-      if (!data.success) {
-        setError(data.message || "Login failed");
-        return false;
+
+      if (data.success) {
+        setUser(data.user);
       }
-      setUser(data.data.user);
-      return true;
-    } catch {
-      setError("Something went wrong. Please try again.");
-      return false;
+    } catch (error) {
+      console.error(error);
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
-  const register = useCallback(async (name: string, email: string, password: string, mobile: string): Promise<boolean> => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, mobile }),
-      });
-      const data = await res.json();
-      if (!data.success) {
-        setError(data.message || "Registration failed");
-        return false;
-      }
-      setUser(data.data.user);
-      return true;
-    } catch {
-      setError("Something went wrong. Please try again.");
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const logout = useCallback(async () => {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } catch {
-      // ignore
-    }
-    setUser(null);
+  useEffect(() => {
+    hydrateUser(); // eslint error
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, error, login, register, logout, clearError }}>
+    <Auth.Provider
+      value={{
+        user,
+        setUser,
+        loading,
+        hydrateUser,
+      }}
+    >
       {children}
-    </AuthContext.Provider>
+    </Auth.Provider>
   );
-}
+};
 
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
+export const useAuth = () => {
+  const context = useContext(Auth);
+
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
+
   return context;
-}
+};
