@@ -76,8 +76,8 @@ export function ResumePreview({ resume }: { resume: Resume }) {
             Education
           </h2>
           <div className="space-y-3">
-            {resume.education.map((e) => (
-              <div key={e.tempId} className="flex items-start justify-between">
+            {resume.education.map((e, id) => (
+              <div key={id} className="flex items-start justify-between">
                 <div>
                   <p className="font-bold text-[13px]">
                     {e.institute || (
@@ -107,8 +107,8 @@ export function ResumePreview({ resume }: { resume: Resume }) {
             Projects
           </h2>
           <div className="space-y-3">
-            {resume.projects.map((proj) => (
-              <div key={proj.tempId}>
+            {resume.projects.map((proj, id) => (
+              <div key={id}>
                 <div className="flex items-center gap-2">
                   <p className="font-bold text-[13px]">
                     {proj.title || <em className="text-[#C4C4CC]">Project</em>}

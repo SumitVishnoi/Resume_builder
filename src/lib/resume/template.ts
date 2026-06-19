@@ -1,6 +1,5 @@
 import { IResume } from "@/types/resume.types";
 
-
 export function esc(str: string): string {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -103,7 +102,7 @@ export function generateResumeHTML(resume: IResume): string {
 
       a {
         text-decoration: none;
-        color: black;
+        color: blue;
       }
     </style>
   </head>
@@ -120,9 +119,31 @@ export function generateResumeHTML(resume: IResume): string {
       </div>
 
       <div class="contact">
-        ${p.githubUrl ? `GitHub: ${esc(p.githubUrl)}` : ""}
-        ${p.linkedIn ? ` | LinkedIn: ${esc(p.linkedIn)}` : ""}
-        ${p.portfolio ? ` | Portfolio: ${esc(p.portfolio)}` : ""}
+        ${
+          p.githubUrl
+            ? `GitHub:
+          <a href="${esc(p.githubUrl)}" target="_blank">
+            ${esc(p.githubUrl)}
+          </a>`
+            : ""
+        } 
+        ${
+          p.linkedIn
+            ? ` | LinkedIn:
+          <a href="${esc(p.linkedIn)}" target="_blank">
+            ${esc(p.linkedIn)}
+          </a>`
+            : ""
+        }
+
+        ${
+          p.portfolio
+            ? ` | Portfolio:
+              <a href="${esc(p.portfolio)}" target="_blank">
+                ${esc(p.portfolio)}
+              </a>`
+            : ""
+        }
       </div>
     </div>
 
@@ -158,7 +179,7 @@ export function generateResumeHTML(resume: IResume): string {
 
             <p>${esc(exp.description)}</p>
           </div>
-        `
+        `,
           )
           .join("")}
 
@@ -203,12 +224,19 @@ export function generateResumeHTML(resume: IResume): string {
 
             ${
               project.liveUrl
-                ? `<p>Live: ${esc(project.liveUrl)}</p>`
-                : ""
+                ? `
+              <p>
+                Live:
+                <a href="${esc(project.liveUrl)}" target="_blank">
+                  ${esc(project.liveUrl)}
+                </a>
+              </p>
+            `
+              : ""
             }
 
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -227,7 +255,7 @@ export function generateResumeHTML(resume: IResume): string {
             .map(
               (skill) => `
             <span class="skill">${esc(skill)}</span>
-          `
+          `,
             )
             .join("")}
         </div>
@@ -257,7 +285,7 @@ export function generateResumeHTML(resume: IResume): string {
             </div>
 
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
