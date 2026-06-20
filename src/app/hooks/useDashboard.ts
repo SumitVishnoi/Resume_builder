@@ -145,6 +145,8 @@ export const useDashboard = () => {
     deleting,
     handleDelete,
     downloadingId,
-    handleDownload
+    handleDownload,
+    deleteTarget,
+    setDeleteTarget
   };
 };

@@ -8,6 +8,7 @@ type Props = {
 }
 
 const Navbar = ({signOut}: Props) => {
+  
   return (
     <header className="bg-white border-b border-[#E4E4E7] sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
