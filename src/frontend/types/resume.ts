@@ -31,7 +31,7 @@ export interface Project {
   tempId?: string;
   title?: string;
   description?: string;
-  techStack?: string;
+  techStack?: string | string[];
   liveUrl?: string;
 }
 

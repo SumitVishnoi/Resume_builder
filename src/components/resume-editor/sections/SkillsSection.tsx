@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Sparkles, Loader2, X, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Resume } from "@/frontend/types/resume";
-import AIPanel from "@/components/summary/AIPanel";
+import AIPanel from "@/components/resume-editor/AIPanel";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -180,7 +180,7 @@ const handleGenerate = async () => {
 
       {/* ── AI Panel ── */}
       {isPanelOpen && (
-        <AIPanel aiState={aiState} jobTitle={jobTitle} closePanel={closePanel} aiError={aiError} setJobTitle={setJobTitle} skills={skills} setSkills={setSkills} experience={experience} setExperience={setExperience} handleGenerate={handleGenerate} isLoading={isLoading} />
+        <AIPanel aiState={aiState} jobTitle={jobTitle} closePanel={closePanel} aiError={aiError} setJobTitle={setJobTitle} experience={experience} setExperience={setExperience} handleGenerate={handleGenerate} isLoading={isLoading} />
       )}
 
       {/* ── Success flash ── */}

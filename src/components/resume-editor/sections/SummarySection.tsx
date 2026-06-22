@@ -5,7 +5,7 @@ import { Resume } from "@/frontend/types/resume";
 import WritingTips from "@/components/summary/WritingTips";
 import { MAX_CHARS} from "@/lib/summary";
 import QualityBar from "@/components/summary/QualityBar";
-import AIPanel from "@/components/summary/AIPanel";
+import AIPanel from "@/components/resume-editor/AIPanel";
 import Textarea from "@/components/summary/Textarea";
 import { useState } from "react";
 
