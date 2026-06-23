@@ -10,11 +10,11 @@ import ATSModal from "@/components/dashboard/ATSModal";
 import DeleteModal from "@/components/dashboard/DeleteModal";
 import StatsStrip from "@/components/dashboard/StatsStrip";
 import EmptyState from "@/components/dashboard/EmptyState";
-import { useDashboard } from "../hooks/useDashboard";
+import { useDashboard } from "../../hooks/useDashboard";
 import Hero from "@/components/dashboard/Hero";
 import Error from "@/components/dashboard/Error";
 import Grid from "@/components/dashboard/Grid";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import ProtectedLayout from "../protected/layout";
 
 // ─── Main Dashboard ───────────────────────────────────────────────────────────

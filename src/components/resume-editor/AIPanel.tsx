@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import FieldLabel from "../summary/FieldLabel";
 import { EXPERIENCE_OPTIONS } from "@/lib/summary";
 import AIInput from "./AIInput";
-import { YEARS_OPTIONS } from "@/lib/experience";
+
 
 type Props = {
   aiState: "open" | "loading" | "error" | "idle";
@@ -27,6 +27,18 @@ type Props = {
   yearsOfExperience?: string;
    setYearsOfExperience?: Dispatch<SetStateAction<string>>;
 };
+
+const YEARS_OPTIONS = [
+  "Less than 1 year",
+  "1 year",
+  "2 years",
+  "3 years",
+  "4 years",
+  "5 years",
+  "6 years",
+  "7+ years",
+  "10+ years",
+];
 
 const AIPanel = ({
   aiState,
