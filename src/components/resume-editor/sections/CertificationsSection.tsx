@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import Card from '../ui/Card';
 import Input from '../ui/Input';
@@ -15,7 +17,7 @@ const CertificationsSection = ({resume, update}: Props) => {
   return (
     <div className="space-y-3">
             {resume.certification?.map((c, i) => (
-              <Card key={c.tempId} onRemove={() => update({ certification: resume.certification.filter((_, j) => j !== i) })}>
+              <Card key={i} onRemove={() => update({ certification: resume.certification.filter((_, j) => j !== i) })}>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">
                     <Label>Certification Name</Label>

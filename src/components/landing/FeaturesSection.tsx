@@ -1,6 +1,9 @@
 import { ElementType } from "react";
 import Reveal from "./Reveal";
 import { FEATURES } from "@/constants/landing";
+import AIFeatureCard from "./AIFeatureCard";
+
+// ─── Regular feature card ─────────────────────────────────────────────────────
 
 function FeatureCard({
   icon: Icon,
@@ -28,10 +31,17 @@ function FeatureCard({
   );
 }
 
+// ─── AI featured card (full-width, highlighted) ───────────────────────────────
+
+
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+
 export default function FeaturesSection() {
   return (
     <section id="features" className="py-24 px-6 bg-[#FAFAFA]">
       <div className="max-w-6xl mx-auto">
+        {/* Heading */}
         <Reveal>
           <div className="text-center mb-12">
             <p className="text-xs font-semibold text-[#7C3AED] uppercase tracking-widest mb-3">
@@ -48,6 +58,12 @@ export default function FeaturesSection() {
           </div>
         </Reveal>
 
+        {/* AI feature — full width, above grid */}
+        <div className="mb-4">
+          <AIFeatureCard />
+        </div>
+
+        {/* Regular feature grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {FEATURES.map((f, idx) => (
             <FeatureCard

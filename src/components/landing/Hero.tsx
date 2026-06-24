@@ -36,14 +36,14 @@ export default function Hero() {
 
             <div className="flex items-center gap-3 flex-wrap">
               <Link
-                href="/register"
+                href="/auth/register"
                 className="flex items-center gap-2 px-6 py-3 bg-[#7C3AED] text-white text-sm font-semibold rounded-xl hover:bg-[#6D28D9] active:scale-[0.97] transition-all shadow-sm shadow-[#7C3AED]/25"
               >
                 Sign up free
                 <ArrowRight size={14} />
               </Link>
               <Link
-                href="/login"
+                href="/auth/login"
                 className="flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-xl border border-[#E4E4E7] text-[#6B7280] hover:bg-white hover:text-[#111318] transition-all"
               >
                 Sign in

@@ -162,8 +162,8 @@ export function ResumePreview({ resume }: { resume: Resume }) {
             Certifications
           </h2>
           <div className="space-y-1.5">
-            {resume.certification.map((c) => (
-              <div key={c.tempId} className="flex items-center justify-between">
+            {resume.certification.map((c, idx) => (
+              <div key={idx} className="flex items-center justify-between">
                 <p className="text-[13px] font-semibold">{c.name}</p>
                 <p className="text-[11px] text-[#9CA3AF]">
                   {c.issuer} {c.year && `· ${c.year}`}

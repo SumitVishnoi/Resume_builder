@@ -47,7 +47,7 @@ export default function WorkExperienceSection({ resume, update }: Props) {
     {}
   );
   const [openAIPanels, setOpenAIPanels] = useState<Record<string, boolean>>({});
-  // const [flashDesc, setFlashDesc] = useState<Record<string, boolean>>({});
+  const [flashDesc, setFlashDesc] = useState<Record<string, boolean>>({});
 
   const toggleCard = (id: string) =>
     setExpandedCards((p) => ({ ...p, [id]: !p[id] }));
@@ -58,10 +58,10 @@ export default function WorkExperienceSection({ resume, update }: Props) {
   const closeAI = (id: string) =>
     setOpenAIPanels((p) => ({ ...p, [id]: false }));
 
-  // const flashDescription = (id: string) => {
-  //   setFlashDesc((p) => ({ ...p, [id]: true }));
-  //   setTimeout(() => setFlashDesc((p) => ({ ...p, [id]: false })), 3500);
-  // };
+  const flashDescription = (id: string) => {
+    setFlashDesc((p) => ({ ...p, [id]: true }));
+    setTimeout(() => setFlashDesc((p) => ({ ...p, [id]: false })), 3500);
+  };
 
   return (
     <div className="space-y-4">
@@ -94,7 +94,7 @@ export default function WorkExperienceSection({ resume, update }: Props) {
           const id = exp.tempId || String(i);
           const isOpen = expandedCards[id] !== false;
           const isAIOpen = openAIPanels[id] === true;
-          // const isFlashing = flashDesc[id];
+          const isFlashing = flashDesc[id];
 
           const headline =
             [exp.position, exp.company].filter(Boolean).join(" · ") ||
@@ -233,12 +233,12 @@ export default function WorkExperienceSection({ resume, update }: Props) {
                         resume={resume}
                         update={update}
                         onClose={() => closeAI(id)}
-                        // onGenerated={() => flashDescription(id)}
+                        onGenerated={() => flashDescription(id)}
                       />
                     )}
 
                     {/* Description textarea with flash border */}
-                    {/* <div className="relative mt-2">
+                    <div className="relative mt-2">
                       {isFlashing && (
                         <div className="absolute inset-0 rounded-xl border-2 border-[#7C3AED] pointer-events-none z-10 animate-pulse" />
                       )}
@@ -254,7 +254,7 @@ export default function WorkExperienceSection({ resume, update }: Props) {
                         }
                         rows={5}
                       />
-                    </div> */}
+                    </div>
 
                     {/* Word count */}
                     {exp.description && (

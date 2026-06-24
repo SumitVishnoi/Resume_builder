@@ -1,6 +1,6 @@
 "use client"
 
-import { FileText, LogOut, Settings } from 'lucide-react'
+import { FileText, LogOut } from 'lucide-react'
 import React from 'react'
 
 type Props = {
@@ -21,9 +21,6 @@ const Navbar = ({signOut}: Props) => {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 rounded-lg text-[#9CA3AF] hover:text-[#6B7280] hover:bg-[#F4F4F5] transition-colors">
-              <Settings size={16} />
-            </button>
             <button onClick={signOut} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[#9CA3AF] hover:text-[#6B7280] hover:bg-[#F4F4F5] transition-colors">
               <LogOut size={15} />
               <span className="hidden sm:inline">Sign out</span>

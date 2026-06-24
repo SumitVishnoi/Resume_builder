@@ -69,7 +69,13 @@ const resumeSchema = new mongoose.Schema<IResume> ({
         default: []
     },
     certification: {
-        type: [String],
+        type: [
+            {
+                name: String,
+                issuer: String,
+                year: String
+            }
+        ],
         default: []
     }
 }, {

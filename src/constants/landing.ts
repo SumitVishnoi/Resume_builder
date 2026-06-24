@@ -5,6 +5,7 @@ import {
   Zap,
   Shield,
   Clock,
+  Sparkles,
 } from "lucide-react";
 
 export const NAV_LINKS = [
@@ -51,6 +52,20 @@ export const FEATURES = [
     body: "Create a tailored version for every role. Each one gets its own ATS score on your dashboard.",
   },
 ];
+
+// Separate — renders as a featured wide card above the grid
+export const AI_FEATURE = {
+  icon: Sparkles,
+  title: "AI-powered writing",
+  badge: "New",
+  body: "Stuck on what to write? Let AI generate your professional summary, work experience descriptions, project write-ups, and skills list — all tailored to your job title, tech stack, and experience level. Edit the output or regenerate in one click.",
+  bullets: [
+    "Professional summary in under 5 seconds",
+    "Experience descriptions calibrated to your seniority",
+    "Project write-ups with ATS-friendly keywords",
+    "15–25 role-specific skills generated instantly",
+  ],
+};
 
 export const STEPS = [
   {

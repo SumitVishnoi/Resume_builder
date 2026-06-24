@@ -137,7 +137,7 @@ export default function HowItWorks() {
 
             <Reveal delay={300}>
               <Link
-                href="/register"
+                href="/auth/register"
                 className="inline-flex items-center gap-2 mt-10 px-5 py-2.5 bg-[#7C3AED] text-white text-sm font-semibold rounded-xl hover:bg-[#6D28D9] active:scale-[0.97] transition-all shadow-sm shadow-[#7C3AED]/20"
               >
                 Get started free

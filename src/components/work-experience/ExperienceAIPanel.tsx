@@ -11,11 +11,13 @@ export default function ExperienceAIPanel({
   resume,
   update,
   onClose,
+  onGenerated,
 }: {
   expIndex: number;
   resume: Resume;
   update: (patch: Partial<Resume>) => void;
   onClose: () => void;
+  onGenerated: () => void;
 }) {
   // Pre-fill jobRole from position if already typed
   const [jobRole, setJobRole] = useState(

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2, AlertCircle, FileText } from "lucide-react";
 import Link from "next/link";
+import { useAuthContext } from "@/context/AuthContext";
 
 type FormState = "idle" | "loading" | "error";
 
@@ -14,6 +15,8 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { hydrateUser } = useAuthContext();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +33,7 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (data.success) {
+        await hydrateUser();
         router.push("/dashboard");
       } else {
         setErrorMessage(data.message || "Something went wrong");

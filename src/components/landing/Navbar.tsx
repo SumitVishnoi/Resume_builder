@@ -50,13 +50,13 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-2">
           <Link
-            href="/login"
+            href="/auth/login"
             className="text-sm font-medium px-3 py-1.5 rounded-lg text-[#6B7280] hover:text-[#111318] hover:bg-[#F4F4F5] transition-colors"
           >
             Sign in
           </Link>
           <Link
-            href="/register"
+            href="/auth/register"
             className="flex items-center gap-1.5 px-4 py-2 bg-[#7C3AED] text-white text-sm font-semibold rounded-xl hover:bg-[#6D28D9] active:scale-[0.97] transition-all shadow-sm shadow-[#7C3AED]/20"
           >
             Sign up free
@@ -88,14 +88,14 @@ export default function Navbar() {
           ))}
           <div className="pt-2 space-y-2">
             <Link
-              href="/login"
+              href="/auth/login"
               className="block py-2.5 text-sm font-medium text-[#6B7280] text-center border border-[#E4E4E7] rounded-xl"
               onClick={() => setMobileOpen(false)}
             >
               Sign in
             </Link>
             <Link
-              href="/register"
+              href="/auth/register"
               className="block py-2.5 px-4 bg-[#7C3AED] text-white text-sm font-semibold rounded-xl text-center"
               onClick={() => setMobileOpen(false)}
             >

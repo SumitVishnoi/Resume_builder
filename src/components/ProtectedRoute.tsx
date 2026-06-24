@@ -1,13 +1,13 @@
 "use client";
 
-import { useAuth } from "@/context/AuthContext";
+import { useAuthContext } from "@/context/AuthContext";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, useEffect } from "react";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, loading } = useAuthContext();
 
   useEffect(() => {
     if (!loading && !user) {

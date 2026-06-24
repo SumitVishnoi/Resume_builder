@@ -1,10 +1,6 @@
 import Link from "next/link";
 import { FileText } from "lucide-react";
 
-const LINKS = [
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
-];
 
 export default function Footer() {
   return (
@@ -23,17 +19,6 @@ export default function Footer() {
           © {new Date().getFullYear()} ResumeKit. All rights reserved.
         </p>
 
-        <div className="flex items-center gap-5">
-          {LINKS.map(({ label, href }) => (
-            <Link
-              key={label}
-              href={href}
-              className="text-xs text-[#9CA3AF] hover:text-[#7C3AED] transition-colors"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
       </div>
     </footer>
   );
