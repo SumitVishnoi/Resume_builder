@@ -30,7 +30,7 @@ export default function Navbar() {
             <FileText size={14} className="text-white" />
           </div>
           <span className="font-semibold text-sm tracking-tight text-[#111318]">
-            ResumeKit
+            Makresume
           </span>
         </Link>
 

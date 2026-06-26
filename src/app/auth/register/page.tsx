@@ -64,7 +64,7 @@ export default function RegisterPage() {
             <FileText size={16} className="text-white" />
           </div>
           <span className="text-white font-semibold text-sm tracking-tight">
-            ResumeKit
+            Makresume
           </span>
         </div>
 

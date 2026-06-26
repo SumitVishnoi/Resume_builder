@@ -17,7 +17,7 @@ const Navbar = ({signOut}: Props) => {
               <FileText size={14} className="text-white" />
             </div>
             <span className="font-semibold text-[#111318] text-sm tracking-tight">
-              ResumeKit
+              Makresume
             </span>
           </div>
           <div className="flex items-center gap-2">

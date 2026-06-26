@@ -4,10 +4,10 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     type: "OAuth2",
-    user: process.env.EMAIL_USER!,
-    clientId: process.env.CLIENT_ID!,
-    clientSecret: process.env.CLIENT_SECRET!,
-    refreshToken: process.env.REFRESH_TOKEN!,
+    user: process.env.GOOGLE_USER!,
+    clientId: process.env.GOOGLE_CLIENT_ID!,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    refreshToken: process.env.GOOGLE_REFRESH_TOKEN!,
   },
 });
 
@@ -24,7 +24,6 @@ interface SendEmailOptions {
   to: string;
   subject: string;
   text?: string;
-  html?: string;
 }
 
 export const sendEmail = async ({
@@ -34,7 +33,7 @@ export const sendEmail = async ({
 }: SendEmailOptions): Promise<void> => {
   try {
     const info = await transporter.sendMail({
-      from: `"makresume" <${process.env.EMAIL_USER}>`,
+      from: process.env.GOOGLE_USER,
       to,
       subject,
       text

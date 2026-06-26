@@ -141,7 +141,7 @@ export default function LoginPage() {
               <FileText size={14} className="text-white" />
             </div>
             <span className="font-semibold text-[#111318] text-sm">
-              ResumeKit
+              Makresume
             </span>
           </div>
 
