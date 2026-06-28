@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2, AlertCircle, FileText } from "lucide-react";
 import Link from "next/link";
 import { useAuthContext } from "@/context/AuthContext";
+import { signIn } from "next-auth/react";
 
 type FormState = "idle" | "loading" | "error";
 
@@ -264,9 +265,11 @@ export default function LoginPage() {
 
             {/* OAuth — Google */}
             <button
-              onClick={() => {
-                window.location.href = "/api/auth/google";
-              }}
+              onClick={() =>
+                signIn("google", {
+                  callbackUrl: "/google-success",
+                })
+              }
               type="button"
               disabled={isLoading}
               className="w-full flex items-center justify-center gap-3 py-3 bg-white border border-[#E4E4E7] rounded-xl text-sm font-medium text-[#374151] hover:bg-[#F4F4F5] hover:border-[#D1D5DB] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-all"

@@ -1,4 +1,4 @@
-import PersonalInfoForm from "@/app/resume/create/personal-info/page";
+
 import { connectDb } from "@/lib/db";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import resumeModel from "@/models/Resume.model";

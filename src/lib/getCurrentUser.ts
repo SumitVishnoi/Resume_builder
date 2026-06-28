@@ -6,7 +6,7 @@ export async function getCurrentUser() {
 
     const token = cookieStore.get('token')?.value
 
-    if(!token) return new Error("token not found")
+    if(!token) throw new Error("token not found")
 
     const decode = verifyToken(token)
 
