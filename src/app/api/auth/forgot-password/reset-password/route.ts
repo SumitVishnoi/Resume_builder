@@ -3,7 +3,6 @@ import otpModel from "@/models/Otp.model";
 import userModel from "@/models/User.model";
 import { ApiResponse } from "@/types/api.types";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {

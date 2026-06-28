@@ -89,13 +89,13 @@ export default function ResumeCard({
                   className="fixed inset-0 z-10"
                   onClick={() => setMenuOpen(false)}
                 />
-                <div className="absolute right-0 top-8 bg-white border border-[#E4E4E7] rounded-xl shadow-lg py-1 w-44 z-20">
+                <div className="absolute right-8 h-fit -top-10 bg-white border border-[#E4E4E7] rounded-xl shadow-lg py-1 w-44 z-20">
                   <button
                     onClick={() => {
                       setMenuOpen(false);
                       onOpen();
                     }}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-[#374151] hover:bg-[#F4F4F5] transition-colors"
+                    className="w-full flex items-center gap-2.5 px-3 py-1 text-sm text-[#374151] hover:bg-[#F4F4F5] transition-colors"
                   >
                     <Edit3 size={13} />
                     Edit

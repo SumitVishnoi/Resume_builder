@@ -1,7 +1,7 @@
-export type ForgotStep = 1 | 2 | 3;
+export type forgetStep = 1 | 2 | 3;
 
-export interface ForgotState {
-  step: ForgotStep;
+export interface forgetState {
+  step: forgetStep;
   email: string;
   otp: string;
 }

@@ -232,7 +232,7 @@ export function generateResumeHTML(resume: IResume): string {
                 </a>
               </p>
             `
-              : ""
+                : ""
             }
 
           </div>
@@ -297,13 +297,24 @@ export function generateResumeHTML(resume: IResume): string {
       resume.certification?.length
         ? `
       <div class="section">
-        <div class="section-title">Certifications</div>
+      <div class="section-title">Certifications</div>
 
-        <ul>
-          ${resume.certification
-            .map((cert) => `<li>${esc(cert)}</li>`)
-            .join("")}
-        </ul>
+        ${resume.certification
+          .map(
+            (cert) => `
+            <div class="item">
+              <div class="item-header">
+                <span>${esc(cert.name)}</span>
+                <span>${esc(cert.year)}</span>
+              </div>
+
+              <div class="subtitle">
+                ${esc(cert.issuer)}
+              </div>
+            </div>
+          `,
+          )
+          .join("")}
       </div>
     `
         : ""

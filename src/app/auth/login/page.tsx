@@ -66,7 +66,7 @@ export default function LoginPage() {
             <FileText size={16} className="text-white" />
           </div>
           <span className="text-white font-semibold text-sm tracking-tight">
-            ResumeKit
+            Makresume
           </span>
         </div>
 
@@ -129,7 +129,7 @@ export default function LoginPage() {
 
         {/* Bottom note */}
         <p className="text-white/30 text-xs relative z-10">
-          © 2026 ResumeKit. All rights reserved.
+          © 2026 Makresume. All rights reserved.
         </p>
       </div>
 
@@ -198,7 +198,7 @@ export default function LoginPage() {
                   href="/forgot-password"
                   className="text-xs text-[#7C3AED] hover:text-[#6D28D9] transition-colors"
                 >
-                  Forgot password?
+                  forget password?
                 </Link>
               </div>
               <div className="relative">

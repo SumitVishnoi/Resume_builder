@@ -6,7 +6,6 @@ import userModel from "@/models/User.model";
 export async function GET(req: NextRequest) {
   try {
     const token = req.cookies.get("token");
-    console.log("token: ", token)
 
     if (!token) {
       return NextResponse.json(
@@ -19,7 +18,6 @@ export async function GET(req: NextRequest) {
     }
 
     const decoded = verifyToken(token.value);
-    console.log("decoded: ", decoded)
 
     if (!decoded || typeof decoded === "string") {
       return NextResponse.json(
@@ -36,7 +34,6 @@ export async function GET(req: NextRequest) {
     await connectDb();
 
     const user = await userModel.findById(decoded.userId).select("-password");
-    console.log("user: ", user)
     if (!user) {
       return NextResponse.json(
         {

@@ -11,12 +11,12 @@ export default function Footer() {
             <FileText size={12} className="text-white" />
           </div>
           <span className="font-semibold text-sm text-[#111318]">
-            ResumeKit
+            Makresume
           </span>
         </Link>
 
         <p className="text-xs text-[#9CA3AF]">
-          © {new Date().getFullYear()} ResumeKit. All rights reserved.
+          © {new Date().getFullYear()} Makresume. All rights reserved.
         </p>
 
       </div>

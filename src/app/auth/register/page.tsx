@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2, AlertCircle, FileText } from "lucide-react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 type FormState = "idle" | "loading" | "error";
 
@@ -44,7 +45,8 @@ export default function RegisterPage() {
   };
 
   const isLoading = formState === "loading";
-  const canSubmit = name.trim() && email.trim() && password.trim() && !isLoading;
+  const canSubmit =
+    name.trim() && email.trim() && password.trim() && !isLoading;
 
   return (
     <div
@@ -116,7 +118,7 @@ export default function RegisterPage() {
         </div>
 
         <p className="text-white/30 text-xs relative z-10">
-          © 2026 ResumeKit. All rights reserved.
+          © 2026 Makresume. All rights reserved.
         </p>
       </div>
 
@@ -129,7 +131,7 @@ export default function RegisterPage() {
               <FileText size={14} className="text-white" />
             </div>
             <span className="font-semibold text-[#111318] text-sm">
-              ResumeKit
+              Makresume
             </span>
           </div>
 
@@ -285,12 +287,18 @@ export default function RegisterPage() {
             <div className="flex-1 h-px bg-[#E4E4E7]" />
           </div>
 
-          {/* Google OAuth */}
+          {/* OAuth — Google */}
           <button
+            onClick={() =>
+              signIn("google", {
+                callbackUrl: "/google-success",
+              })
+            }
             type="button"
             disabled={isLoading}
             className="w-full flex items-center justify-center gap-3 py-3 bg-white border border-[#E4E4E7] rounded-xl text-sm font-medium text-[#374151] hover:bg-[#F4F4F5] hover:border-[#D1D5DB] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
+            {/* Google SVG */}
             <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
               <path
                 d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"

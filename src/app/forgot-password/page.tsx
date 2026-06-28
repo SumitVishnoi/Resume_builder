@@ -7,11 +7,11 @@ import StepIndicator from "@/components/forgot-password/StepIndicator";
 import StepEmail from "@/components/forgot-password/StepEmail";
 import StepOTP from "@/components/forgot-password/StepOTP";
 import StepNewPassword from "@/components/forgot-password/StepNewPassword";
-import { ForgotState } from "@/frontend/types/forgot-password";
+import { forgetState } from "@/frontend/types/forgot-password";
 
 
-export default function ForgotPasswordPage() {
-  const [state, setState] = useState<ForgotState>({
+export default function forgetPasswordPage() {
+  const [state, setState] = useState<forgetState>({
     step: 1,
     email: "",
     otp: "",

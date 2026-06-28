@@ -100,7 +100,7 @@ export default function StepOTP({ email, onSuccess }: Props) {
     setDigits(Array(OTP_LENGTH).fill(""));
 
     try {
-      const res = await fetch("/api/auth/forgot-password", {
+      const res = await fetch("/api/auth/forget-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

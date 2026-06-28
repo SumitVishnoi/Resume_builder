@@ -1,4 +1,4 @@
-import { ForgotStep } from "@/frontend/types/forgot-password";
+import { forgetStep } from "@/frontend/types/forgot-password";
 import { Check } from "lucide-react";
 
 
@@ -8,7 +8,7 @@ const STEPS = [
   { n: 3, label: "New password" },
 ];
 
-export default function StepIndicator({ current }: { current: ForgotStep }) {
+export default function StepIndicator({ current }: { current: forgetStep }) {
   return (
     <div className="flex items-center justify-center gap-0 mb-8">
       {STEPS.map((s, i) => {

@@ -60,7 +60,7 @@ export default function LiveResumeCard() {
         <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
         <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
         <span className="ml-3 text-[10px] font-medium text-[#9CA3AF]">
-          resume-editor · ResumeKit
+          resume-editor · Makresume
         </span>
       </div>
 
