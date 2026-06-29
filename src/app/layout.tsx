@@ -11,8 +11,17 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ResumeAI — Build ATS-Optimized Resumes",
+  title: "Makresume — Build ATS-Optimized Resumes",
   description: "Create professional, ATS-ready resumes with AI assistance",
+
+    keywords: [
+    "resume builder",
+    "cv maker",
+    "resume maker",
+    "ATS resume",
+    "online resume builder",
+    "professional resume",
+  ],
 };
 
 export default function RootLayout({
