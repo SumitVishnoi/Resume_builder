@@ -119,7 +119,7 @@ export function ResumeProvider({ children, resumeId }: { children: ReactNode; re
   const addEducation = useCallback(() => {
     setResumeDataState((prev) => ({
       ...prev,
-      education: [...prev.education, { institute: "", degree: "", startDate: "", endDate: "" }],
+      education: [...prev.education, { institute: "", degree: "", startDate: "", endDate: "", gpa:"", field:"" }],
     }));
   }, []);
 
