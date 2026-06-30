@@ -1,7 +1,7 @@
 import { verifyToken } from "@/lib/generateToken";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const token = await req.cookies.get("token");
 
   if (!token) {
