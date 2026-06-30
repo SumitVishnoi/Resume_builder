@@ -30,7 +30,7 @@ export interface IEducation {
   institute: string;
   degree: string;
   field: string;
-  gpa: number;
+  gpa: string;
   startDate: string;
   endDate: string;
 }
