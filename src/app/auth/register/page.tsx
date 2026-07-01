@@ -321,21 +321,7 @@ export default function RegisterPage() {
           </button>
 
           <p className="text-center text-[11px] text-[#C4C4CC]">
-            By creating an account you agree to our{" "}
-            <Link
-              href="/terms"
-              className="underline hover:text-[#9CA3AF] transition-colors"
-            >
-              Terms
-            </Link>{" "}
-            and{" "}
-            <Link
-              href="/privacy"
-              className="underline hover:text-[#9CA3AF] transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            .
+            By creating an account you agree to our Terms and Privacy Policy.
           </p>
         </div>
       </div>

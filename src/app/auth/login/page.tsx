@@ -223,21 +223,7 @@ export default function LoginPage() {
             </div>
 
             <p className="text-center text-[11px] text-[#C4C4CC]">
-              By signing in you agree to our{" "}
-              <Link
-                href="/terms"
-                className="underline hover:text-[#9CA3AF] transition-colors"
-              >
-                Terms
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="/privacy"
-                className="underline hover:text-[#9CA3AF] transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              .
+              By signing in you agree to our Terms and Privacy Policy.
             </p>
 
             {/* Submit */}
